@@ -12,3 +12,7 @@ body {
     padding-top: 0;
     text-align: right;
   }
+.gh-link {
+    color: black;
+    margin-right: 15px;
+}
