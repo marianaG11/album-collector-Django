@@ -4,4 +4,6 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name = 'about'),
+    #route for the albums index
+    path('albums/', views.albums_index, name = 'index'),
 ]
