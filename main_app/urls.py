@@ -6,4 +6,5 @@ urlpatterns = [
     path('about/', views.about, name = 'about'),
     #route for the albums index
     path('albums/', views.albums_index, name = 'index'),
+    path('albums/<int:album_id>/', views.albums_detail, name = 'detail'),
 ]
