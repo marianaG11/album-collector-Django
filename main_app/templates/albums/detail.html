@@ -10,7 +10,11 @@
     
             </div>
         </a>
-        </div>
+        <div class="card-action">
+            <a href="{% url 'albums_update' album.id %}">Edit</a>
+            <a href="{% url 'albums_delete' album.id %}">Delete</a>
+          </div>
+    </div>
 
 {% endblock content %}
     

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 #import CreateView 
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Add the following import
 from django.http import HttpResponse
@@ -11,6 +11,21 @@ from .models import Album
 class AlbumCreate(CreateView):
 	model = Album 
 	fields = '__all__'
+
+class AlbumUpdate(UpdateView):
+	model = Album
+	fields = ['artist_name', 'number_of_songs', 'genre', 'release_date']
+
+class AlbumDelete(DeleteView):
+	model = Album
+	#redirect back to the albums index page since the album doesnt exists anymore
+	success_url = '/albums/' 
+	
+
+
+
+
+
 
 
 # Create your views here.
