@@ -2,19 +2,38 @@
 
 {% block content%}
     <h1>Album Details</h1>
-    <div class="card">
+<div class="row">
+    <div class="col s6">
+        <div class="card">
             <div class = "card-content">
                 <span class = "card-title">{{album.name}}</span>
                 <p>Number of Songs: {{album.number_of_songs}}</p>
                 <p>Release Date: {{album.release_date}}</p>
-    
+
             </div>
         </a>
         <div class="card-action">
             <a href="{% url 'albums_update' album.id %}">Edit</a>
             <a href="{% url 'albums_delete' album.id %}">Delete</a>
-          </div>
+            </div>
+        </div>
     </div>
+    <div class="col s6">
+        <table class="striped">
+            <thead>
+                <tr><th>Name</th><th>Minutes</th></tr>
+            </thead>
+            <tbody>
+                {% for song in album.song_set.all %}
+                <tr>
+                    <td>{{song.name}}</td>
+                    <td>{{song.minutes}}</td>
+                </tr>
+                {% endfor %}   
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {% endblock content %}
     
