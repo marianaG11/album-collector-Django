@@ -13,4 +13,5 @@ urlpatterns = [
     path('albums/<int:pk>/update/', views.AlbumUpdate.as_view(), name='albums_update'),
     #to delete
     path('albums/<int:pk>/delete/', views.AlbumDelete.as_view(), name='albums_delete'), 
+    path('albums/<int:album_id>/add_song/', views.add_song, name='add_song'),
 ]
