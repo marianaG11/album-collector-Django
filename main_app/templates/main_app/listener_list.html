@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>All Listeners</h1>
+
+{% for listener in listener_list %}
+  <a href="{% url 'listeners_detail' listener.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ listener.name }}</span>
+            <p>Location: {{ listener.location }}</p>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock content%}
