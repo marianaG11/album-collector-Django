@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- shows the albums bname obly when we are editing not creating an album -->
+<!-- shows the albums name only when we are editing not creating an album -->
     {% if object %}
         <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
     {% else %}
@@ -17,4 +17,5 @@
     </table>
     <input type="submit" value="Submit!" class="btn">
   </form>
+
 {% endblock content %}

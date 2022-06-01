@@ -43,3 +43,10 @@ class Song(models.Model):
     
 	# def __str__(self):
 	#     return f"{self.get_minutes_display()} on {self.name}"
+ 
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for album_id: {self.album_id} @{self.url}"

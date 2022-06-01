@@ -21,4 +21,6 @@ urlpatterns = [
     path('listeners/create/', views.ListenerCreate.as_view(), name='listeners_create'),
     path('listeners/<int:pk>/update/', views.ListenerUpdate.as_view(), name='listeners_update'),
     path('listeners/<int:pk>/delete/', views.ListenerDelete.as_view(), name='listeners_delete'),
+    #path for photos
+    path('albums/<int:album_id>/add_photo/', views.add_photo, name='add_photo'),
     ]
