@@ -21,11 +21,16 @@
         </ul>
         <ul class="right">
           <li><a href="/about">About</a></li>
+          {% if user.is_authenticated %}
           <li><a href="/albums">View All Albums</a></li>
           <li><a href ="{% url 'albums_create' %}">Add New Album</a></li>
           <li><a href="{% url 'listeners_create' %}">Add Listener</a></li>
           <li><a href="{% url 'listeners_index' %}">View All Listeners</a></li>
-          
+          <li><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+          <li><a href="{% url 'signup' %}">Signup</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>

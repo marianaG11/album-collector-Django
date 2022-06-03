@@ -25,7 +25,14 @@ BUCKET = 'catcollectormarianag'
 
 class AlbumCreate(CreateView):
 	model = Album
-	fields = '__all__'
+	fields = ['name', 'artist_name', 'number_of_songs', 'genre', 'release_year']
+	#this inherited method is called when a valid album form is submitted
+	def form_valid(self,form):
+		form.instance.user = self.request.user #form.instance is the album
+		return super().form_valid(form)
+ 
+ 
+ 
 
 class AlbumUpdate(UpdateView):
 	model = Album
