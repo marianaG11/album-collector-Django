@@ -23,7 +23,7 @@ import uuid
 S3_BASE_URL = 'https://s3.us-west-1.amazonaws.com/'
 BUCKET = 'catcollectormarianag'
 
-class AlbumCreate(CreateView):
+class AlbumCreate(LoginRequiredMixin, CreateView):
 	model = Album
 	fields = ['name', 'artist_name', 'number_of_songs', 'genre', 'release_year']
 	#this inherited method is called when a valid album form is submitted
@@ -34,11 +34,11 @@ class AlbumCreate(CreateView):
  
  
 
-class AlbumUpdate(UpdateView):
+class AlbumUpdate(LoginRequiredMixin, UpdateView):
 	model = Album
 	fields = ['artist_name', 'number_of_songs', 'genre', 'release_date']
 
-class AlbumDelete(DeleteView):
+class AlbumDelete(LoginRequiredMixin, DeleteView):
 	model = Album
 	#redirect back to the albums index page since the album doesn't exists anymore
 	success_url = '/albums/' 
@@ -75,10 +75,13 @@ def home(request):
 def about(request):
 	return render(request, 'about.html')
 
+@login_required
 def albums_index(request):
-	albums = Album.objects.all()
+	albums = Album.objects.filter(user=request.user) #to only show the logged in User's albums
 	return render(request, 'albums/index.html', {'albums': albums})
 
+
+@login_required
 def albums_detail(request, album_id):
 	album = Album.objects.get(id=album_id)
 	#get the listeners the album doesnt have
@@ -89,7 +92,7 @@ def albums_detail(request, album_id):
 		#include the album and the song_form in the context
 		'album': album, 'song_form': song_form, 'listeners': listeners_album_doesnt_have})
 
-	
+@login_required
 def add_song(request, album_id):
 	
 	form = SongForm(request.POST)
@@ -100,12 +103,14 @@ def add_song(request, album_id):
 	
 	return redirect('detail', album_id=album_id)
 
-
+@login_required
 def assoc_listener(request, album_id, listener_id):
     #can pass in a listeners id instead of the whole object
 	Album.objects.get(id=album_id).listeners.add(listener_id)
 	return redirect('detail', album_id=album_id)
 
+
+@login_required
 def add_photo(request, album_id):
     # photo-file will be the "name" attribute on the <input type="file">
     photo_file = request.FILES.get('photo-file', None)
@@ -125,20 +130,20 @@ def add_photo(request, album_id):
     return redirect('detail', album_id=album_id)
 
 
-class ListenerList(ListView):
+class ListenerList(LoginRequiredMixin, ListView):
     model = Listener
 
-class ListenerDetail(DetailView):
+class ListenerDetail(LoginRequiredMixin, DetailView):
     model = Listener
     
-class ListenerCreate(CreateView):
+class ListenerCreate(LoginRequiredMixin, CreateView):
     model = Listener
     fields = '__all__'
     
-class ListenerUpdate(UpdateView):
+class ListenerUpdate(LoginRequiredMixin, UpdateView):
     model = Listener
     fields = ['name', 'location']
     
-class ListenerDelete(DeleteView):
+class ListenerDelete(LoginRequiredMixin, DeleteView):
     model = Listener
     success_url = '/listeners/'
