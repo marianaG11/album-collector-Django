@@ -5,11 +5,14 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 # Add the following import
 from django.http import HttpResponse
-
 from .models import Album, Listener, Photo
 #import the SongForm
 from .forms import SongForm
-
+#for the login function
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin 
+from django.contrib.auth.decorators import login_required
 #boto3 library
 import boto3
 
@@ -33,6 +36,27 @@ class AlbumDelete(DeleteView):
 	#redirect back to the albums index page since the album doesn't exists anymore
 	success_url = '/albums/' 
 	
+
+def signup(request):
+
+	error_message = ""
+    
+	if request.method == 'POST':
+		# This is how to create a 'user' form object
+		# that includes the data from the browser
+		#on a post lets signup the user and log them in
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			user = form.save() #this saves the user to the DB
+			#login takes two arguments of request and user
+			login(request, user)#now the user is logged in and available on every request
+			return redirect('index')
+		else:
+			error_message = 'Invalid sign up - try again'
+	# A bad POST or a GET request, so render signup.html with an empty form
+	form = UserCreationForm()
+	context = {'form': form, 'error_message': error_message}
+	return render(request, 'registration/signup.html', context) #rendering out a template
 
 
 

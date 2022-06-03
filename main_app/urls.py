@@ -23,4 +23,6 @@ urlpatterns = [
     path('listeners/<int:pk>/delete/', views.ListenerDelete.as_view(), name='listeners_delete'),
     #path for photos
     path('albums/<int:album_id>/add_photo/', views.add_photo, name='add_photo'),
+    #new url to sign up new users
+    path('accounts/signup/', views.signup, name='signup'),
     ]

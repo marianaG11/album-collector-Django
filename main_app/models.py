@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User #import the User model for authentication
 #import the reverse function
 from django.urls import reverse
 # Create your models here.
@@ -25,7 +25,7 @@ class Album(models.Model):
 	genre = models.TextField(max_length=100)
 	release_date = models.IntegerField()
 	listeners = models.ManyToManyField(Listener)
- 
+	user = models.ForeignKey(User, on_delete=models.CASCADE) #link the Album to the User
 	def __str__(self): 
 		return self.name
 
