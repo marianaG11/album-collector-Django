@@ -36,7 +36,7 @@ class AlbumCreate(LoginRequiredMixin, CreateView):
 
 class AlbumUpdate(LoginRequiredMixin, UpdateView):
 	model = Album
-	fields = ['artist_name', 'number_of_songs', 'genre', 'release_date']
+	fields = ['artist_name', 'number_of_songs', 'genre', 'release_year']
 
 class AlbumDelete(LoginRequiredMixin, DeleteView):
 	model = Album

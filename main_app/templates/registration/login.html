@@ -5,7 +5,7 @@
     <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" class="btn" value="login">
+        <input type="submit" class="btn red lighten-1" value="login">
         <input type="hidden" name="next" value="{{ next }}">
     </form>
 {% endblock content %}
