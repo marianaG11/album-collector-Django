@@ -96,7 +96,7 @@
 </div>
 
 <div>
-  <h3>Upload a photo</h3>
+  <h3>Upload an Album Cover</h3>
   <hr/>
   {% for photo in album.photo_set.all %}
   <img class="responsive-img card-panel" src="{{photo.url}}">
@@ -110,7 +110,7 @@
    {% csrf_token %}
    <input type="file" name="photo-file">
    <br><br>
-   <input type="submit" class="btn red lighten-1" value="Upload Photo">
+   <input type="submit" class="btn red lighten-1" value="Upload Cover">
 </form>
 
 {% endblock content %}
