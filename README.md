@@ -8,7 +8,7 @@
 ![Homepage](/main_app/static/css/images/home.png)
 
 ### Album Details Page
-![details](/main_app//static/css/images/details.png)
+![details](/main_app//static/css/images/detailspage.png)
 
 
 ## Technologies Used
